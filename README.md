@@ -37,9 +37,41 @@ To remove the images
 make clean
 ```
 
+### Testing the FastAPI Component 
+
+In Postman or another API platform make a post request to the /predict FastAPI endpoint (ex: http://localhost:8000/predict if running locally) with a json formatted body like the following:
+
 ```json
 {
     "text": "I thought it was a great movie. I really enjoyed the final scene.",
     "true_label": "positive"
 }
+```
+
+You should see a response back that is the predicted sentiment:
+
+```json
+{
+    "Sentiment": "positive"
+}
+```
+
+### Testing the Streamlit (Model-Monitoring) Component
+
+In your browser, http://host-ip-address:8501 to reach the dashboard and there you will be able to see the different visualizations and metrics for monitoring the model performance.
+
+This application measures the models performance using data from the shared logs/ directory (shared with the FastAPI app). In order to quickly test the application as well as generate log data, run the evaluate.py script described below.
+
+### Testing and Log Generation Using evaluate.py
+
+The evaluate.py is a python script designed to repeatedly test the /predict FastAPI endpoint and generate log data. evaluate.py the test_data.json file with a list of hundreds of request body examples to send requests to the /predict FastAPI endpoint which will then send data to the logs file. You may update the url on line 10 of this file to one containing the appropriate IP address of the host machine:
+
+If running locally:
+```python
+url = "http://localhost:8000/predict" 
+```
+
+To run evaluate.py:
+```bash
+python3 evaluate.py
 ```
