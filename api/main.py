@@ -45,7 +45,6 @@ def write_logs(input_data, prediction):
 
     # format log object as a json object
     new_log_json = new_log.model_dump_json()
-    # new_log_json['timestamp'] = new_log_json['timestamp'].isoformat()
     
     # set log file path -- Using .jsonl b/c will be cleaner than using a list format
     file_path = "../logs/prediction_logs.ndjson"
@@ -54,32 +53,21 @@ def write_logs(input_data, prediction):
     if not os.path.isdir("../logs"):
         os.makedirs("../logs", exist_ok=True)
         with open(file_path, "w") as log_file:
-            # json.dump(new_log_json, log_file, indent=1)
             log_file.write(new_log_json)
-            return(new_log_json)
+            return 
 
     # check if log file exists, if not, create it and write new log to file then return
     # also checks if file is empty, if so, write new log then return
     if not os.path.exists(file_path) or os.path.getsize(file_path) == 0:
         with open(file_path, "w") as log_file:
-            # json.dump(new_log_json, log_file, indent=4)
             log_file.write(new_log_json)
-            return(new_log_json)
+            return 
         
     # otherwise, write new log with new line
     else:
         existing_logs_list = []
-        # new_logs_list = []
         with open(file_path, "a") as log_file:
-            # existing_logs_list.append(json.load(log_file))
-            # existing_logs_list.append(new_log_json)
-            # json.dump(existing_logs_list, log_file, indent=4)
-            # return(existing_logs_list)
-            #return(existing_logs_list)
             log_file.write(f'\n{new_log_json}')
-        # with open(file_path, 'w') as log_file:
-        #     json.dump(existing_logs_list, log_file, indent=4)
-        #     return(existing_logs_list)
 
 # create startup event to print if model is not loaded
 @app.on_event("startup")
@@ -110,7 +98,7 @@ async def make_prediction(input_data: predict_input):
     prediction = model.predict(text_array)
     
     # write new log to logs file by calling write_logs function
-    log_out = write_logs(input_data, prediction)
+    write_logs(input_data, prediction)
 
     # return the prediction from the model
     return {'Sentiment': prediction[0]}
