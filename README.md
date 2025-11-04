@@ -1,2 +1,7 @@
-# Sentiment Model Running With Fast Api
 # mlops-model-monitoring
+
+## Instructions
+
+```bash
+pip install cua-agent[all]
+```
