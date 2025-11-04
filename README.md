@@ -37,9 +37,9 @@ To remove the images
 make clean
 ```
 
-'''json
+```json
 {
     "text": "I thought it was a great movie. I really enjoyed the final scene.",
     "true_label": "positive"
 }
-'''
+```
