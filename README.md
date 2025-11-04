@@ -64,7 +64,7 @@ This application measures the models performance using data from the shared logs
 
 ### Testing and Log Generation Using evaluate.py
 
-evaluate.py is a python script designed to repeatedly test the /predict FastAPI endpoint and generate log data. evaluate.py uses the test_data.json file with a list of hundreds of request body examples to send requests to the /predict FastAPI endpoint which will then send data to the logs file. You may update the url on line 10 of this file to one containing the appropriate IP address of the host machine:
+evaluate.py is a python script designed to repeatedly test the /predict FastAPI endpoint and generate log data. evaluate.py uses the test_data.json file with a list of hundreds of request body examples to send requests to the /predict FastAPI endpoint which will then send data to the logs file. This script also prints the final accuracy measured on the model predictions compared to the true sentiments of the requests in the test_data.json file. You may update the url on line 10 of this file to one containing the appropriate IP address of the host machine:
 
 If running locally:
 ```python
